@@ -1,0 +1,156 @@
+/* --- 1. 폰트 파일 등록하기 --- */
+@font-face {
+    font-family: 'TitleFont'; 
+    src: url('온글잎 수야.ttf') format('truetype'); 
+}
+
+@font-face {
+    font-family: 'DialogueFont'; 
+    src: url('온글잎 수야.ttf') format('truetype'); 
+}
+
+/* 화면 전체 정중앙에 게임 창 배치 */
+body {
+    margin: 0;
+    background: #ffeef2;
+    font-family: 'TitleFont', 'Malgun Gothic', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* --- 게임 컨테이너 (1402x1122 비율 + PC/모바일 반응형) --- */
+#game-container {
+    width: 800px;
+    height: 640px; 
+    position: relative;
+    border: 4px solid #ffb6c1;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    background-color: #fff;
+}
+
+/* 모바일 화면 반응형 크기 조절 */
+@media screen and (max-width: 850px) {
+    #game-container {
+        width: 94vw;
+        height: calc(94vw * (1122 / 1402)); 
+    }
+}
+
+/* 화면 전환용 공통 클래스 */
+.screen {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 숨김 처리 클래스 */
+.hidden {
+    display: none !important;
+}
+
+/* --- [1] 타이틀 화면 스타일 --- */
+#title-screen {
+    background-image: url('title-bg.jpg'); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 5;
+}
+
+#game-title {
+    font-size: 42px;
+    color: #d84355;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.9);
+}
+
+#game-subtitle {
+    font-size: 18px;
+    color: #c75c6c;
+    margin-bottom: 40px;
+    font-weight: bold;
+    text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.9);
+}
+
+#start-btn {
+    padding: 12px 35px;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    background-color: #ff7b90;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(255, 123, 144, 0.4);
+    transition: all 0.2s ease-in-out;
+}
+
+#start-btn:hover {
+    background-color: #ff5c77;
+    transform: scale(1.05);
+}
+
+/* --- [2] 게임 플레이 화면 --- */
+#play-screen {
+    background-image: url('play-bg.jpg'); 
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* --- 하단 대화창 틀 --- */
+#dialogue-box {
+    position: absolute;
+    bottom: 2.5%;
+    left: 50%;
+    transform: translateX(-50%);
+    
+    width: 92%;
+    aspect-ratio: 2156 / 729; 
+    
+    background-image: url('dialogue-bg.png'); 
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    
+    z-index: 10;
+    cursor: pointer;
+}
+
+/* --- 이름표 위치 및 폰트 (창 크기에 따라 커지고 작아짐) --- */
+#speaker-name {
+    position: absolute;
+    top: 24.5%;     
+    left: 18%;    
+    
+    font-weight: bold;
+    color: #523737;
+    font-size: clamp(20px, 2.2vw, 20px); /* 최소 12px, 화면 비율에 따라 커짐, 최대 20px 제한 */
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+    font-family: 'DialogueFont', sans-serif;
+}
+
+/* --- 메인 대사 칸 위치 및 폰트 (창 크기에 따라 커지고 작아짐) --- */
+#dialogue-text {
+    position: absolute;
+    top: 52%;     
+    left: 14%;    
+    width: 70%;     
+    
+    color: #523737;
+    font-size: clamp(21px, 1.8vw, 17px); /* 최소 11px, 화면 비율에 따라 커짐, 최대 17px 제한 */
+    line-height: 1.45;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+    font-family: 'DialogueFont', sans-serif;
+}
